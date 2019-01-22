@@ -1,0 +1,39 @@
+\section{main.\+cpp File Reference}
+\label{main_8cpp}\index{main.\+cpp@{main.\+cpp}}
+{\ttfamily \#include \char`\"{}Semaphore.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \textbf{ task\+One} (std\+::shared\+\_\+ptr$<$ \textbf{ Semaphore} $>$ the\+Semaphore, int delay)
+\item 
+void \textbf{ task\+Two} (std\+::shared\+\_\+ptr$<$ \textbf{ Semaphore} $>$ the\+Semaphore)
+\item 
+int \textbf{ main} (void)
+\end{DoxyCompactItemize}
+
+
+\subsection{Function Documentation}
+\mbox{\label{main_8cpp_a840291bc02cba5474a4cb46a9b9566fe}} 
+\index{main.\+cpp@{main.\+cpp}!main@{main}}
+\index{main@{main}!main.\+cpp@{main.\+cpp}}
+\subsubsection{main()}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{void}]{ }\end{DoxyParamCaption})}
+
+$<$ Launch the threads
+
+$<$ Wait for the threads to finish \mbox{\label{main_8cpp_a2b4729d561c345111ccab970fe11e229}} 
+\index{main.\+cpp@{main.\+cpp}!task\+One@{task\+One}}
+\index{task\+One@{task\+One}!main.\+cpp@{main.\+cpp}}
+\subsubsection{task\+One()}
+{\footnotesize\ttfamily void task\+One (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \textbf{ Semaphore} $>$}]{the\+Semaphore,  }\item[{int}]{delay }\end{DoxyParamCaption})}
+
+displays a message first signal task 2 to run \mbox{\label{main_8cpp_ae4ea9570be601d182fa473c7ca431852}} 
+\index{main.\+cpp@{main.\+cpp}!task\+Two@{task\+Two}}
+\index{task\+Two@{task\+Two}!main.\+cpp@{main.\+cpp}}
+\subsubsection{task\+Two()}
+{\footnotesize\ttfamily void task\+Two (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \textbf{ Semaphore} $>$}]{the\+Semaphore }\end{DoxyParamCaption})}
+
+displays a message second make task 2 wait until task one signals 

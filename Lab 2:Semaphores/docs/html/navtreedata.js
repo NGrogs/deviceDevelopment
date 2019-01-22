@@ -1,6 +1,6 @@
 var NAVTREE =
 [
-  [ "Second Lab Exercise", "index.html", [
+  [ "Lab 2 Semaphores", "index.html", [
     [ "Classes", "annotated.html", [
       [ "Class List", "annotated.html", "annotated_dup" ],
       [ "Class Index", "classes.html", null ],

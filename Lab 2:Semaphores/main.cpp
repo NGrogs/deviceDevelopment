@@ -2,7 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <unistd.h>
-/*! \class Signal
+/*! \main.cpp
     \brief An Implementation of Threads Using Semaphores 
 
    Uses C++11 features such as mutex and condition variables to implement Semaphores in thread functions 
@@ -15,9 +15,13 @@ void taskOne(std::shared_ptr<Semaphore> theSemaphore, int delay){
   std::cout << "must ";
   std::cout << "print ";
   std::cout << "first"<<std::endl;
+  /** signal task 2 to run */
+  theSemaphore->Signal();
 }
 /*! displays a message second*/
 void taskTwo(std::shared_ptr<Semaphore> theSemaphore){
+  /** make task 2 wait until task one signals */
+  theSemaphore->Wait();
   std::cout <<"This ";
   std::cout << "will ";
   std::cout << "appear ";

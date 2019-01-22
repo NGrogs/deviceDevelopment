@@ -1,7 +1,6 @@
 var NAVTREEINDEX0 =
 {
 "_semaphore_8cpp.html":[1,0,1],
-"_semaphore_8cpp_source.html":[1,0,1],
 "_semaphore_8h.html":[1,0,2],
 "_semaphore_8h_source.html":[1,0,2],
 "annotated.html":[0,0],
@@ -22,11 +21,9 @@ var NAVTREEINDEX0 =
 "main_8cpp.html#a2b4729d561c345111ccab970fe11e229":[1,0,0,1],
 "main_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe":[1,0,0,0],
 "main_8cpp.html#ae4ea9570be601d182fa473c7ca431852":[1,0,0,2],
-"main_8cpp_source.html":[1,0,0],
 "pages.html":[],
 "signal_8cpp.html":[1,0,3],
 "signal_8cpp.html#a2b4729d561c345111ccab970fe11e229":[1,0,3,1],
 "signal_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe":[1,0,3,0],
-"signal_8cpp.html#ae4ea9570be601d182fa473c7ca431852":[1,0,3,2],
-"signal_8cpp_source.html":[1,0,3]
+"signal_8cpp.html#ae4ea9570be601d182fa473c7ca431852":[1,0,3,2]
 };
