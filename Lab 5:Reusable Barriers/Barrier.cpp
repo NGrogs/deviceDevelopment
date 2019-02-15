@@ -45,8 +45,45 @@
 
 // Code:
 #include "Semaphore.h"
+#include <iostream>
 #include "Barrier.h"
 
+std::shared_ptr<Semaphore> aSemaphore( new Semaphore(1) );
+int count = 0;
+Barrier::Barrier(int numThreads) {
+
+  this->numThreads = numThreads;
+  
+}
+
+void Barrier::wait() {
+
+  // count ++;
+ 
+  // if number of threads is not at max, wait / else all can go
+  if(count < numThreads){
+    // increment thread count
+    //  count ++;
+    
+    // lock other threads out
+    aSemaphore->Wait();
+    count ++;
+    aSemaphore->Signal();
+  }
+  else{
+    aSemaphore->Signal();
+    count = 0;
+  }
+  
+  // aSemaphore->Signal();
+}
+
+
+Barrier::~Barrier() {
+
+  numThreads = NULL;
+
+}
 
 // 
 // Barrier.cpp ends here
