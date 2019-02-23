@@ -49,6 +49,8 @@
 #include "Barrier.h"
 
 std::shared_ptr<Semaphore> aSemaphore( new Semaphore(1) );
+std::shared_ptr<Semaphore> turnstile1( new Semaphore(0) );
+std::shared_ptr<Semaphore> turnstile2( new Semaphore(0) );
 int count = 0;
 Barrier::Barrier(int numThreads) {
 
@@ -56,32 +58,55 @@ Barrier::Barrier(int numThreads) {
   
 }
 
+
+void Barrier::phase1() {
+
+  aSemaphore->Wait();
+  count ++;
+  if(count == numThreads)
+    {
+      for(int i= 0; i <= numThreads; i++)
+	{
+	  turnstile1->Signal();
+	}
+    }
+  aSemaphore->Signal();
+
+  turnstile1->Wait();
+   turnstile1->Signal();
+  
+}
+
+void Barrier::phase2() {
+  
+  aSemaphore->Wait();
+  count --;
+  if(count ==0)
+    {
+      for(int i =0; i <= numThreads; i++)
+	{
+	  turnstile2->Signal();
+	}
+    }
+  aSemaphore->Signal();
+  
+  turnstile2->Wait();
+  turnstile2->Signal();
+
+}
+
 void Barrier::wait() {
 
-  // count ++;
- 
-  // if number of threads is not at max, wait / else all can go
-  if(count < numThreads){
-    // increment thread count
-    //  count ++;
-    
-    // lock other threads out
-    aSemaphore->Wait();
-    count ++;
-    aSemaphore->Signal();
-  }
-  else{
-    aSemaphore->Signal();
-    count = 0;
-  }
+  phase1();
+  phase2();
   
-  // aSemaphore->Signal();
 }
 
 
 Barrier::~Barrier() {
 
   numThreads = NULL;
+  
 
 }
 

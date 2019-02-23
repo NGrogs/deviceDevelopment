@@ -49,7 +49,9 @@ class Barrier{
  public:
   Barrier(int numThreads);
   virtual ~Barrier();
-  void wait();  
+  void wait();
+  void phase1();
+  void phase2();
 };
 
 
