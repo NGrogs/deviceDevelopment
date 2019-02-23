@@ -48,45 +48,42 @@
 #include <iostream>
 #include "Barrier.h"
 
-std::shared_ptr<Semaphore> aSemaphore( new Semaphore(1) );
-std::shared_ptr<Semaphore> turnstile1( new Semaphore(0) );
-std::shared_ptr<Semaphore> turnstile2( new Semaphore(0) );
-int count = 0;
 Barrier::Barrier(int numThreads) {
 
   this->numThreads = numThreads;
-  
+  count = 0;
+  aSemaphore.reset( new Semaphore(1) );
+  turnstile1.reset( new Semaphore(0) );
+  turnstile2.reset( new Semaphore(1) );
 }
 
 
 void Barrier::phase1() {
 
   aSemaphore->Wait();
-  count ++;
+  ++ count ;
   if(count == numThreads)
     {
-      for(int i= 0; i <= numThreads; i++)
-	{
-	  turnstile1->Signal();
-	}
+      
+      turnstile2->Wait();
+      turnstile1->Signal();
+	
     }
   aSemaphore->Signal();
 
   turnstile1->Wait();
-   turnstile1->Signal();
+  turnstile1->Signal();
   
 }
 
 void Barrier::phase2() {
   
   aSemaphore->Wait();
-  count --;
-  if(count ==0)
+  -- count ;
+  if(count == 0)
     {
-      for(int i =0; i <= numThreads; i++)
-	{
-	  turnstile2->Signal();
-	}
+      turnstile1->Wait();
+      turnstile2->Signal();
     }
   aSemaphore->Signal();
   
@@ -105,8 +102,10 @@ void Barrier::wait() {
 
 Barrier::~Barrier() {
 
-  numThreads = NULL;
-  
+
+  aSemaphore.reset();
+  turnstile1.reset();
+  turnstile2.reset();
 
 }
 
