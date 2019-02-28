@@ -46,16 +46,19 @@
 #pragma once
 #include "Event.h"
 #include "Semaphore.h"
+#include <vector>
 class SafeBuffer{
  public:
-  SafeBuffer(int size);
-  virtual ~SafeBuffer();
-  void put(std::shared_ptr<Event> e);
-  std::shared_ptr<Event> get();
+  SafeBuffer();
+  int put(Event);
+  Event get();
+  //  ~SafeBuffer();
+  
  private:
+  std::vector<Event> theEvents;
   std::shared_ptr<Semaphore> mutex;
-  std::shared_ptr<Semaphore> items;
-  std::shared_ptr<Semaphore> spaces;
+  std::shared_ptr<Semaphore> theSemaphore;
+  //std::shared_ptr<Semaphore> spaces;
 };
 
 /* SafeBuffer.h ends here */

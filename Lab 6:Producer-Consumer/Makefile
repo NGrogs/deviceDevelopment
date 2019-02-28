@@ -7,13 +7,15 @@
 
 CC=g++
 CFLAGS= -std=c++11 -pthread
+CFILES= SafeBuffer.cpp Semaphore.cpp Event.cpp main.cpp
+OBJFILES= SafeBuffer.o Semaphore.o Event.o main.o
 
 #This rule says that each .o file depends on a .cpp file of the same name
 %.o: %.cpp
 	$(CC) -c -o $@ $< $(CFLAGS) $(DEBUGFLAGS)
 
-ALL: main.o Semaphore.o SafeBuffer.o
-	$(CC) -o main main.o Semaphore.o SafeBuffer.o $(CFLAGS) $(DEBUGFLAGS)
+ALL: $(OBJFILES)
+	$(CC) -o lab6 $(OBJFILES) $(CFLAGS) $(DEBUGFLAGS)
 
 DEBUG: DEBUGFLAGS = -DDEBUG
 DEBUG: ALL

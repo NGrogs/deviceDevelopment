@@ -1,28 +1,31 @@
 #include "SafeBuffer.h"
 
 
-SafeBarrier::SafeBarrier(int size) {
+SafeBuffer::SafeBuffer() {
 
   
-  mutex.reset(new Semaphore(1) );
-  items.reset(new Semaphore(0) );
-  spaces.reset(new Semaphore(size) );
-}
+  mutex = std::make_shared<Semaphore>(1);
+  theSemaphore = std::make_shared<Semaphore>(0);
+  // items.reset(new Semaphore(0) );
+  // spaces.reset(new Semaphore(size) );
+}//const
 
 
-void SafeBarrier::put(std::shared_ptr<Event> e) {
+int SafeBuffer::put(Event e) {
+  mutex->Wait();
+  theEvents.push_back(e);
+  int size = theEvents.size();
+  mutex->Signal();
+  theSemaphore->Signal();
+  return size ;
+}//put
 
-  
-}
+Event SafeBuffer::get() {
+  theSemaphore->Wait();
+  mutex->Wait();
+  Event e = theEvents.back();
+  theEvents.pop_back();
+  mutex->Signal();
+  return e;
+}//get
 
-std::shared_ptr<Event> SafeBarrier::get() {
-
-  
-}
-
-SafeBarrier::~SafeBarrier() {
-  mutex.reset();
-  items.reset();
-  spaces.reset();
-  
-}

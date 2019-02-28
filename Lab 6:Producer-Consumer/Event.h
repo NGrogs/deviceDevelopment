@@ -48,16 +48,12 @@
 class Event{
 
  public:
-  Event(int i);
-  ~Event();
-  void consume();
-
-
+  Event();
+  bool consume();
  private:
+  char myChar;
 
-
-
-}
+};
 
 
 /* Event.h ends here */
