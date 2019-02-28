@@ -43,7 +43,19 @@
  */
 
 /* Code: */
-
-
+#pragma once
+#include "Event.h"
+#include "Semaphore.h"
+class SafeBuffer{
+ public:
+  SafeBuffer(int size);
+  virtual ~SafeBuffer();
+  void put(std::shared_ptr<Event> e);
+  std::shared_ptr<Event> get();
+ private:
+  std::shared_ptr<Semaphore> mutex;
+  std::shared_ptr<Semaphore> items;
+  std::shared_ptr<Semaphore> spaces;
+};
 
 /* SafeBuffer.h ends here */

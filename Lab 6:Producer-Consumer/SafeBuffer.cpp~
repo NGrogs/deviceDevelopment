@@ -1,0 +1,12 @@
+#include "SafeBuffer.h"
+
+
+SafeBarrier::SafeBarrier() {
+
+  
+}
+
+SafeBarrier::~SafeBarrier() {
+
+  
+}
